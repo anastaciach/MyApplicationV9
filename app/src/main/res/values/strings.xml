@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My ApplicationV9</string>
+    <string name="count_pages">Количество страниц:</string>
+    <string name="button_calculate">OK</string>
+    <string name="price_pages">Цена</string>
+    <string name="discount">Скидка</string>
+    <string name="seek_bar_discount"></string>
+    <string name="edit_text_pages"/>
+</resources>
