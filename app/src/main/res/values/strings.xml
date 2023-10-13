@@ -5,5 +5,5 @@
     <string name="price_pages">Цена</string>
     <string name="discount">Скидка</string>
     <string name="seek_bar_discount"></string>
-    <string name="edit_text_pages"/>
+    <string name="edit_text_pages" />
 </resources>

@@ -26,9 +26,10 @@ class MainActivity : ComponentActivity() {
     private lateinit var seekBarDiscount: SeekBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         buttonCalculate=findViewById(R.id.button_calculate)
         textViewPricePages=findViewById(R.id.price_pages)
-        textViewDiscount=findViewById(R.id.seek_bar_discount)
+        textViewDiscount=findViewById(R.id.discount)
         seekBarDiscount=findViewById(R.id.seek_bar_discount)
         editTextPages=findViewById(R.id.edit_text_pages)
 
@@ -56,21 +57,5 @@ class MainActivity : ComponentActivity() {
 
         // Отображаем итоговую сумму на экране
         textViewPricePages.text = "Итоговая сумма: $total руб."
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyApplicationV9Theme {
-        Greeting("Android")
     }
 }
