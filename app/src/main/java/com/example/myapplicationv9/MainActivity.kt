@@ -1,5 +1,6 @@
 package com.example.myapplicationv9
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         buttonCalculate=findViewById(R.id.button_calculate)
-        textViewPricePages=findViewById(R.id.price_pages)
+        //textViewPricePages=findViewById(R.id.price_pages)
         textViewDiscount=findViewById(R.id.discount)
         seekBarDiscount=findViewById(R.id.seek_bar_discount)
         editTextPages=findViewById(R.id.edit_text_pages)
@@ -42,11 +43,18 @@ class MainActivity : ComponentActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+
         buttonCalculate.setOnClickListener {
-            calculateTotal()
+            val total = calculateTotal() // Получаем результат вычисления
+            // Создаем Intent
+            val intent = Intent(this, SecondActivity::class.java)
+            // Передаем результат в Intent
+            intent.putExtra("result", total.toString())
+            // Запускаем вторую активность
+            startActivity(intent)
         }
     }
-    private fun calculateTotal() {
+    private fun calculateTotal():Double {
         // Получаем количество страниц и скидку
         val pages = editTextPages.text.toString().toDouble()
         val discount = seekBarDiscount.progress
@@ -54,8 +62,7 @@ class MainActivity : ComponentActivity() {
         // Рассчитываем итоговую сумму с учетом скидки
         var total = pages * 1.0 // Предположим, что стоимость печати 1 рубль за страницу
         total -= (total * discount) / 100
-
-        // Отображаем итоговую сумму на экране
-        textViewPricePages.text = "Итоговая сумма: $total руб."
+        return total
     }
+
 }
