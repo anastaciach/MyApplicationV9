@@ -21,21 +21,26 @@ import com.example.myapplicationv9.ui.theme.MyApplicationV9Theme
 class MainActivity : ComponentActivity() {
 
     private lateinit var editTextPages: EditText
-    private lateinit var textViewPricePages: TextView
+    private lateinit var textViewPriceAct1: TextView
     private lateinit var textViewDiscount:TextView
+    private lateinit var textViewCountPages:TextView
     private lateinit var buttonCalculate: Button
     private lateinit var seekBarDiscount: SeekBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         buttonCalculate=findViewById(R.id.button_calculate)
-        //textViewPricePages=findViewById(R.id.price_pages)
+
         textViewDiscount=findViewById(R.id.discount)
         seekBarDiscount=findViewById(R.id.seek_bar_discount)
         editTextPages=findViewById(R.id.edit_text_pages)
+        textViewCountPages=findViewById(R.id.count_pages)
+
+        val price=2
 
         seekBarDiscount.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+
                 textViewDiscount.text = "Скидка: $progress%"
             }
 
@@ -45,7 +50,7 @@ class MainActivity : ComponentActivity() {
         })
 
         buttonCalculate.setOnClickListener {
-            val total = calculateTotal() // Получаем результат вычисления
+            val total = calculateTotal(price) // Получаем результат вычисления
             // Создаем Intent
             val intent = Intent(this, SecondActivity::class.java)
             // Передаем результат в Intent
@@ -54,13 +59,10 @@ class MainActivity : ComponentActivity() {
             startActivity(intent)
         }
     }
-    private fun calculateTotal():Double {
-        // Получаем количество страниц и скидку
+    private fun calculateTotal(count:Int):Double {
         val pages = editTextPages.text.toString().toDouble()
         val discount = seekBarDiscount.progress
-
-        // Рассчитываем итоговую сумму с учетом скидки
-        var total = pages * 1.0 // Предположим, что стоимость печати 1 рубль за страницу
+        var total = pages * 1.0
         total -= (total * discount) / 100
         return total
     }
